@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#10151d">
+  <meta name="description" content="Chess Arena — a mobile-first single-player chess game.">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Chess Arena</title>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div><div class="eyebrow">SINGLE PLAYER CHESS</div><h1>CHESS <span>ARENA</span></h1></div>
+      <button id="installBtn" class="icon-btn hidden" aria-label="Install app">＋ Install</button>
+    </header>
+
+    <section class="opponent panel">
+      <div class="avatar">♟</div>
+      <div class="opponent-copy"><strong>Stockfish</strong><small>COMPUTER OPPONENT</small></div>
+      <span id="engineStatus" class="status-pill">Connecting engine…</span>
+    </section>
+
+    <section class="game">
+      <div class="player-line"><span id="topPlayer">COMPUTER · BLACK</span><span id="topClock">ENGINE</span></div>
+      <div id="board" class="board" role="grid" aria-label="Chess board"></div>
+      <div class="player-line bottom-line"><span>YOU · WHITE</span><span id="turnLabel">YOUR MOVE</span></div>
+    </section>
+
+    <section class="panel controls">
+      <div class="section-head"><h2>Game controls</h2><span id="gameStatus">White to move</span></div>
+      <div class="button-row">
+        <button id="undoBtn" class="secondary">↶ Undo</button>
+        <button id="flipBtn" class="secondary">⇅ Flip board</button>
+        <button id="newBtn" class="primary">New game</button>
+      </div>
+      <label class="field-label" for="mode">BOT PLAY STYLE</label>
+      <select id="mode">
+        <option value="max">Maximum strength</option>
+        <option value="hard" selected>Hard game</option>
+        <option value="mate">Quickest checkmate focus</option>
+      </select>
+      <label class="field-label" for="elo">BOT ELO <output id="eloValue">2000</output></label>
+      <input id="elo" type="range" min="800" max="3200" step="100" value="2000">
+      <label class="field-label" for="opening">CHOOSE BOT'S FIRST MOVE</label>
+      <div class="opening-row">
+        <select id="opening" disabled><option>Start a new game to choose a reply</option></select>
+        <button id="playOpening" class="secondary" disabled>Play selected</button>
+      </div>
+      <button id="autoBot" class="primary" disabled>Let Stockfish choose</button>
+      <p class="hint">After your move, choose the bot's reply or let Stockfish choose. Flip board changes the viewpoint only; every piece stays upright.</p>
+    </section>
+
+    <section class="panel history-panel">
+      <div class="section-head"><h2>Move history</h2><span id="moveCount">0 moves</span></div>
+      <div id="history" class="history">No moves yet.</div>
+    </section>
+    <footer>Chess Arena · Powered by Stockfish when the engine is available</footer>
+  </main>
+  <div id="promotion" class="modal hidden" role="dialog" aria-modal="true" aria-label="Choose promotion">
+    <div class="modal-card"><h2>Promote pawn</h2><div class="promotion-options">
+      <button data-piece="q">♕</button><button data-piece="r">♖</button><button data-piece="b">♗</button><button data-piece="n">♘</button>
+    </div></div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
